@@ -1,37 +1,26 @@
-function logDriverNames(arr){
-arr.forEach(function(element) {
-  console.log(element.name);
-});
-   
-  }
-  
-  function logDriversByHometown(arr,obj){
-arr.forEach(function(element) {
-  if(element.hometown===obj){
-  console.log(element.name);}
-});
-   
-  }
-  function driversByRevenue(arr){
+function logDriverNames(drivers) {
+  drivers.forEach(d => console.log(d.name))
+}
 
-    arr.sort(
-      function (a, b) {return a.revenue - b.revenue;}
-      );
-  return arr;
- }
- function driversByName(arr){
- arr.sort(function(a, b) {
-  var nameA = a.name.toUpperCase(); // ignore upper and lowercase
-  var nameB = b.name.toUpperCase(); // ignore upper and lowercase
-  if (nameA < nameB) {
-    return -1;
-  }
-  if (nameA > nameB) {
-    return 1;
-  }
+function logDriversByHometown(drivers, hometown) {
+  drivers.forEach(function(d) {
+    if (d.hometown === hometown) { console.log(d.name) }
+  })
+}
 
-  // names must be equal
-  return 0;
-});
-return arr;
+function driversByRevenue(drivers) {
+  return drivers.slice().sort( (a, b) => {return a.revenue - b.revenue} )
+}
+
+function driversByName(drivers) {
+  return drivers.slice().sort( (a, b) => {return a.name.localeCompare(b.name)} )
+}
+
+function totalRevenue(drivers) {
+  return drivers.reduce((total, driver) => {return total + driver.revenue}, 0)
+}
+
+
+function averageRevenue(drivers) {
+  return totalRevenue(drivers) / drivers.length
 }
