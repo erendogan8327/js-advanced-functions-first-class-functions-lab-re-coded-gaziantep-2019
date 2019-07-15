@@ -1,26 +1,21 @@
-function logDriverNames(drivers) {
-  drivers.forEach(d => console.log(d.name))
+const returnFirstTwoDrivers = function(drivers) {
+  return drivers.slice(0,2)
 }
 
-function logDriversByHometown(drivers, hometown) {
-  drivers.forEach(function(d) {
-    if (d.hometown === hometown) { console.log(d.name) }
-  })
+const returnLastTwoDrivers = function (drivers) {
+  return drivers.slice(-2)
 }
 
-function driversByRevenue(drivers) {
-  return drivers.slice().sort( (a, b) => {return a.revenue - b.revenue} )
+const selectingDrivers = [returnFirstTwoDrivers, returnLastTwoDrivers]
+
+const createFareMultiplier = function(i) {
+  return function(fare) { return fare * i }
 }
 
-function driversByName(drivers) {
-  return drivers.slice().sort( (a, b) => {return a.name.localeCompare(b.name)} )
-}
+const fareDoubler = createFareMultiplier(2);
 
-function totalRevenue(drivers) {
-  return drivers.reduce((total, driver) => {return total + driver.revenue}, 0)
-}
+const fareTripler = createFareMultiplier(3);
 
-
-function averageRevenue(drivers) {
-  return totalRevenue(drivers) / drivers.length
+function selectDifferentDrivers(drivers, fn) {
+  return fn(drivers);
 }
